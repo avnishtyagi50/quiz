@@ -141,19 +141,30 @@ function printQuestion(i) {
 }
 
 function checkAnswer(option) {
-    attempt++;  // Increase the attempt counter for each question answered
+    attempt++; // Increase the attempt counter
     let optionClicked = $(option).data("opt");
+    let correctAnswer = questions[index].answer;
 
-    if (optionClicked == questions[index].answer) {
+    if (optionClicked == correctAnswer) {
         $(option).addClass("right");
         score++;
     } else {
         $(option).addClass("wrong");
+
+        // Show the correct answer by adding 'right' class to the correct option
+        $(".optionBox span").each(function () {
+            if ($(this).data("opt") == correctAnswer) {
+                $(this).addClass("right");
+            }
+        });
+
         wrong++;
     }
 
     $(".scoreBox span").text(score);
-    $(".optionBox span").attr("onclick", "");  // Disable further clicks on options
+
+    // Disable further clicking on options
+    $(".optionBox span").attr("onclick", "");
 }
 
 function showNext() {
