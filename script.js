@@ -167,6 +167,7 @@ function checkAnswer(option) {
     $(".optionBox span").attr("onclick", "");
 }
 
+
 function showNext() {
     if (index >= questions.length - 1) {
         showResult();  // Show the result if it's the last question
