@@ -42,27 +42,32 @@ function printQuestion(i)
 
 }
 
-function checkAnswer(option)
-{
-    attempt++<=10;
+function checkAnswer(option) {
+    attempt++; // Increase the attempt counter
     let optionClicked = $(option).data("opt");
-    // console.log(questions[index]);
+    let correctAnswer = questions[index].answer;
 
-    if(optionClicked == questions[index].answer)
-    {
+    if (optionClicked == correctAnswer) {
         $(option).addClass("right");
         score++;
-    }
-    else
-    {
+    } else {
         $(option).addClass("wrong");
+
+        // Show the correct answer by adding 'right' class to the correct option
+        $(".optionBox span").each(function () {
+            if ($(this).data("opt") == correctAnswer) {
+                $(this).addClass("right");
+            }
+        });
+
         wrong++;
     }
 
     $(".scoreBox span").text(score);
-    $(".optionBox span").attr("onclick","");
-}
 
+    // Disable further clicking on options
+    $(".optionBox span").attr("onclick", "");
+}
 function showNext()
 {
     if(index >= questions.length -1)
